@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Financial Vulnerability in Italy — Project Overview</title>
+  <style>
+    :root {
+      --blue:   #4C72B0;
+      --red:    #C44E52;
+      --green:  #55A868;
+      --purple: #8172B2;
+      --orange: #DD8452;
+      --bg:     #f9f9fb;
+      --card:   #ffffff;
+      --border: #e2e4e9;
+      --text:   #1e2230;
+      --muted:  #6b7285;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: linear-gradient(135deg, #1a2744 0%, #2d4a8a 100%);
+      color: #fff;
+      padding: 3rem 2rem 2.5rem;
+      text-align: center;
+    }
+    header .badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 999px;
+      font-size: 0.78rem;
+      padding: 0.25rem 0.85rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+    }
+    header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+    header p.subtitle {
+      font-size: 1rem;
+      opacity: 0.8;
+      max-width: 680px;
+      margin: 0 auto 1.2rem;
+    }
+    .author-line {
+      font-size: 0.85rem;
+      opacity: 0.65;
+    }
+
+    /* ── LAYOUT ── */
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+    }
+
+    /* ── SECTION TITLES ── */
+    .section-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 3px solid var(--blue);
+      display: inline-block;
+    }
+
+    /* ── CARDS ── */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.4rem 1.6rem;
+      margin-bottom: 1.2rem;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+    .card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .card p, .card li {
+      font-size: 0.92rem;
+      color: #3a3f50;
+    }
+    .card ul { padding-left: 1.2rem; }
+    .card ul li { margin-bottom: 0.25rem; }
+
+    /* ── GRID ── */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    @media (max-width: 720px) {
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    }
+
+    /* ── KPI CHIPS ── */
+    .kpi-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-bottom: 2rem;
+    }
+    .kpi {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.85rem 1.2rem;
+      flex: 1 1 160px;
+      text-align: center;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+    .kpi .val {
+      font-size: 1.8rem;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+    .kpi .lbl {
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .kpi.blue .val  { color: var(--blue); }
+    .kpi.red .val   { color: var(--red); }
+    .kpi.green .val { color: var(--green); }
+    .kpi.purple .val{ color: var(--purple); }
+    .kpi.orange .val{ color: var(--orange); }
+
+    /* ── NOTEBOOK CARDS ── */
+    .nb-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 1.6rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .nb-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.4rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .nb-num {
+      font-size: 1.6rem;
+      font-weight: 900;
+      width: 2.4rem;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .nb-header-text h2 {
+      font-size: 1.05rem;
+      font-weight: 700;
+    }
+    .nb-header-text .nb-file {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-family: "SFMono-Regular", Consolas, monospace;
+    }
+    .nb-body {
+      padding: 1.2rem 1.4rem;
+    }
+    .nb-body p {
+      font-size: 0.92rem;
+      margin-bottom: 0.8rem;
+    }
+    .nb-body h4 {
+      font-size: 0.88rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      margin: 0.8rem 0 0.4rem;
+    }
+    .step-list {
+      list-style: none;
+      padding: 0;
+    }
+    .step-list li {
+      font-size: 0.91rem;
+      padding: 0.3rem 0 0.3rem 1.5rem;
+      position: relative;
+      border-left: 2px solid var(--border);
+      margin-left: 0.5rem;
+      margin-bottom: 0.2rem;
+      color: #3a3f50;
+    }
+    .step-list li::before {
+      content: "▸";
+      position: absolute;
+      left: 0.3rem;
+      color: var(--blue);
+    }
+
+    /* ── FINDINGS TABLE ── */
+    .findings-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      margin-top: 0.6rem;
+    }
+    .findings-table th {
+      background: #f0f2f7;
+      padding: 0.55rem 0.9rem;
+      text-align: left;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      border-bottom: 2px solid var(--border);
+    }
+    .findings-table td {
+      padding: 0.6rem 0.9rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .findings-table tr:last-child td { border-bottom: none; }
+    .findings-table tr:nth-child(even) td { background: #fafbfc; }
+
+    /* ── MODEL TABLE ── */
+    .model-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+    .model-table th {
+      background: #1a2744;
+      color: #fff;
+      padding: 0.55rem 0.9rem;
+      text-align: left;
+      font-size: 0.8rem;
+    }
+    .model-table td {
+      padding: 0.6rem 0.9rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .model-table tr:last-child td { background: #fffbe6; font-weight: 700; }
+    .acc-bar {
+      display: inline-block;
+      height: 10px;
+      border-radius: 5px;
+      margin-left: 0.5rem;
+      vertical-align: middle;
+    }
+
+    /* ── SCORE PILL ── */
+    .pill {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 0.15rem 0.7rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+    .pill.red    { background: #fde8e8; color: #b02020; }
+    .pill.green  { background: #e4f4e9; color: #257a40; }
+    .pill.blue   { background: #e8eef8; color: #2a4a8a; }
+    .pill.orange { background: #fdf0e3; color: #9a5a10; }
+
+    /* ── FEATURE BARS ── */
+    .feat-row {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.45rem;
+      font-size: 0.88rem;
+    }
+    .feat-name { width: 180px; flex-shrink: 0; }
+    .feat-bar-wrap { flex: 1; background: #e8eef8; border-radius: 4px; height: 12px; }
+    .feat-bar { height: 12px; border-radius: 4px; }
+    .feat-val { width: 42px; text-align: right; font-weight: 700; font-size: 0.83rem; color: var(--muted); }
+
+    /* ── CLUSTER CARDS ── */
+    .cluster-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.8rem;
+    }
+    @media (max-width: 600px) { .cluster-grid { grid-template-columns: 1fr; } }
+    .cluster-card {
+      border-radius: 10px;
+      padding: 1rem 1.2rem;
+      border-left: 5px solid;
+    }
+    .cluster-card.a { border-color: #C44E52; background: #fff5f5; }
+    .cluster-card.b { border-color: #DD8452; background: #fff8f0; }
+    .cluster-card.c { border-color: #C7B133; background: #fdfbec; }
+    .cluster-card.d { border-color: #55A868; background: #f2fbf4; }
+    .cluster-card .c-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 0.4rem; }
+    .cluster-card .c-score { font-size: 1.5rem; font-weight: 900; margin-bottom: 0.3rem; }
+    .cluster-card p { font-size: 0.85rem; color: #4a4f60; }
+
+    /* ── PIPELINE ── */
+    .pipeline {
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+      overflow-x: auto;
+      padding-bottom: 0.5rem;
+    }
+    .pipe-step {
+      text-align: center;
+      flex: 1;
+      min-width: 140px;
+    }
+    .pipe-step .p-icon {
+      font-size: 1.6rem;
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+    .pipe-step .p-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--blue);
+    }
+    .pipe-step .p-sub {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+    .pipe-arrow {
+      font-size: 1.4rem;
+      color: #bbb;
+      align-self: center;
+      padding: 0 0.2rem;
+    }
+
+    /* ── STATS ROW ── */
+    .stat-diff {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.8rem;
+      margin-top: 0.6rem;
+    }
+    .stat-diff-card {
+      background: #f5f7ff;
+      border-radius: 8px;
+      padding: 0.8rem 1rem;
+      border: 1px solid #dde3f5;
+    }
+    .stat-diff-card .groups {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.3rem;
+    }
+    .stat-diff-card .grp { font-size: 0.82rem; color: var(--muted); }
+    .stat-diff-card .scores {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .stat-diff-card .low  { font-size: 1.3rem; font-weight: 800; color: var(--red); }
+    .stat-diff-card .high { font-size: 1.3rem; font-weight: 800; color: var(--green); }
+    .stat-diff-card .gap-lbl { font-size: 0.75rem; color: var(--muted); text-align: center; }
+    .stat-diff-card .gap { font-size: 0.9rem; font-weight: 700; color: var(--blue); text-align: center; }
+    .stat-diff-card .label { font-size: 0.8rem; font-weight: 700; margin-bottom: 0.4rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #1a2744;
+      color: rgba(255,255,255,0.6);
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.82rem;
+    }
+    footer strong { color: rgba(255,255,255,0.9); }
+
+    /* ── TAGS ── */
+    .tag {
+      display: inline-block;
+      background: #e8eef8;
+      color: var(--blue);
+      border-radius: 4px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 0.15rem 0.5rem;
+      margin: 0.1rem 0.1rem 0.1rem 0;
+    }
+    .tag.eng { background: #e4f4e9; color: #257a40; }
+
+    hr.sec { border: none; border-top: 2px solid var(--border); margin: 2.5rem 0; }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════ HEADER ════════════════ -->
+<header>
+  <div class="badge">Data Science Lab · University of Milano-Bicocca · A.Y. 2025/26</div>
+  <h1>Financial Vulnerability in Italy<br>Who Is Left Behind in Financial Literacy?</h1>
+  <p class="subtitle">
+    An individual-level analysis of the Bank of Italy IACOFI 2023 survey, examining which
+    demographic, socioeconomic, and behavioural factors predict financial vulnerability
+    among Italian adults — and which groups are most at risk.
+  </p>
+  <div class="author-line">
+    Authors: <strong>Amin Entezari</strong> &amp; <strong>Ali Sedghiye</strong>
+    &nbsp;·&nbsp; Supervisor: Prof. Silvio Gerli
+  </div>
+</header>
+
+<!-- ════════════════ CONTAINER ════════════════ -->
+<div class="container">
+
+  <!-- ── DATASET AT A GLANCE ── -->
+  <div class="kpi-row">
+    <div class="kpi blue">
+      <div class="val">4,862</div>
+      <div class="lbl">Italian adults surveyed</div>
+    </div>
+    <div class="kpi purple">
+      <div class="val">219</div>
+      <div class="lbl">Survey variables</div>
+    </div>
+    <div class="kpi orange">
+      <div class="val">11.70</div>
+      <div class="lbl">National mean score /21</div>
+    </div>
+    <div class="kpi red">
+      <div class="val">41.5%</div>
+      <div class="lbl">Classified as vulnerable</div>
+    </div>
+    <div class="kpi green">
+      <div class="val">70.1%</div>
+      <div class="lbl">Best model accuracy</div>
+    </div>
+  </div>
+
+  <!-- ── RESEARCH QUESTION ── -->
+  <div class="card" style="border-left: 5px solid var(--blue); background: #f0f4ff;">
+    <h3>Research Question</h3>
+    <p style="font-size:1rem; font-style:italic; margin-top:0.3rem;">
+      "Which demographic, socioeconomic and behavioural factors predict financial vulnerability
+      among Italian adults, and which population groups are most at risk?"
+    </p>
+    <p style="margin-top:0.6rem; font-size:0.88rem; color: var(--muted);">
+      Framed as a <strong>problem-identification</strong> task: locate and characterise the worst-off
+      groups and understand what drives their disadvantage, rather than maximise a predictive metric.
+    </p>
+  </div>
+
+  <!-- ── PIPELINE ── -->
+  <hr class="sec" />
+  <div class="section-title">Analysis Pipeline</div>
+  <div class="pipeline">
+    <div class="pipe-step">
+      <span class="p-icon">📥</span>
+      <div class="p-label">01 — Load</div>
+      <div class="p-sub">Raw CSV + ISTAT merge</div>
+    </div>
+    <div class="pipe-arrow">→</div>
+    <div class="pipe-step">
+      <span class="p-icon">📐</span>
+      <div class="p-label">02 — Score</div>
+      <div class="p-sub">OECD/INFE composite</div>
+    </div>
+    <div class="pipe-arrow">→</div>
+    <div class="pipe-step">
+      <span class="p-icon">🔍</span>
+      <div class="p-label">03 — EDA</div>
+      <div class="p-sub">Gaps + significance tests</div>
+    </div>
+    <div class="pipe-arrow">→</div>
+    <div class="pipe-step">
+      <span class="p-icon">🤖</span>
+      <div class="p-label">04 — Model</div>
+      <div class="p-sub">LR · RF · K-Means</div>
+    </div>
+    <div class="pipe-arrow">→</div>
+    <div class="pipe-step">
+      <span class="p-icon">⚙️</span>
+      <div class="p-label">05 — Engineer</div>
+      <div class="p-sub">Behavioural features + GB</div>
+    </div>
+  </div>
+
+  <hr class="sec" />
+
+  <!-- ════════ NOTEBOOK 01 ════════ -->
+  <div class="section-title">Notebooks — Deep Dive</div>
+
+  <div class="nb-card">
+    <div class="nb-header" style="background: #f0f4ff;">
+      <div class="nb-num" style="color: var(--blue);">01</div>
+      <div class="nb-header-text">
+        <h2>Data Loading &amp; Preprocessing</h2>
+        <div class="nb-file">notebooks/01_data_loading.ipynb</div>
+      </div>
+    </div>
+    <div class="nb-body">
+      <p>
+        Ingests the raw Bank of Italy IACOFI 2023 survey file and prepares it for downstream analysis.
+        The survey uses coded missing-value sentinels rather than true <code>NaN</code>s, which must
+        be replaced before any computation.
+      </p>
+
+      <h4>Steps</h4>
+      <ul class="step-list">
+        <li>Load <code>Database_ENG.csv</code> via pandas — <strong>4,862 rows × 219 columns</strong></li>
+        <li>Inspect column names, dtypes (116 int64, 103 float64), and top-missing columns (many "follow-up only" items have 4,332+ NaNs)</li>
+        <li>Replace sentinel codes <code>-97</code> (don't know), <code>-98</code> (not applicable), <code>-99</code> (refused), <code>-999</code> (irrelevant) with <code>np.nan</code></li>
+        <li>Enrich with ISTAT 2023 macro-regional statistics (unemployment rate &amp; internet penetration) merged on region code <code>qd2</code></li>
+        <li>Output: <code>data/processed/iacofi_clean.csv</code> — 4,862 rows × <strong>222 columns</strong></li>
+      </ul>
+
+      <h4>Regional Distribution (after merge)</h4>
+      <div class="grid-2">
+        <div>
+          <table class="findings-table">
+            <thead><tr><th>Macro-Region</th><th>N</th><th>Unemployment</th><th>Internet %</th></tr></thead>
+            <tbody>
+              <tr><td>North-West</td><td>1,317</td><td>4.7%</td><td>86.3%</td></tr>
+              <tr><td>South</td><td>1,139</td><td>14.0%</td><td>78.0%</td></tr>
+              <tr><td>North-East</td><td>952</td><td>3.8%</td><td>86.1%</td></tr>
+              <tr><td>Center</td><td>915</td><td>6.5%</td><td>85.0%</td></tr>
+              <tr><td>Islands</td><td>539</td><td>13.5%</td><td>79.5%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card" style="background:#f5f7ff;">
+          <h3>Key Observation</h3>
+          <p>Missing income (<code>qd13</code>) affects <strong>1,513 respondents (31%)</strong> — a substantial non-response rate likely correlated with income level itself, creating potential bias in income analyses.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════ NOTEBOOK 02 ════════ -->
+  <div class="nb-card">
+    <div class="nb-header" style="background: #f0f8f4;">
+      <div class="nb-num" style="color: var(--green);">02</div>
+      <div class="nb-header-text">
+        <h2>Score Construction &amp; Validation</h2>
+        <div class="nb-file">notebooks/02_score_construction.ipynb</div>
+      </div>
+    </div>
+    <div class="nb-body">
+      <p>
+        Implements the <strong>OECD/INFE composite financial literacy score (0–21)</strong> exactly
+        following the international methodology. Uses NaN-aware scoring so unanswered questions do
+        not inflate scores.
+      </p>
+
+      <h4>Three Dimensions</h4>
+      <div class="grid-3">
+        <div class="card" style="border-top: 4px solid var(--blue);">
+          <h3 style="color:var(--blue);">Knowledge (0–7)</h3>
+          <p>7 factual questions on inflation, interest rates, simple &amp; compound interest, risk-return trade-off, and diversification.</p>
+          <p style="margin-top:0.5rem;"><strong>Mean: 5.02 ± 1.56</strong></p>
+        </div>
+        <div class="card" style="border-top: 4px solid var(--green);">
+          <h3 style="color:var(--green);">Behaviour (0–9)</h3>
+          <p>9 binary items: budgeting, saving habits, ability to cover financial shocks, paying bills on time, setting financial goals, monitoring spending.</p>
+          <p style="margin-top:0.5rem;"><strong>Mean: 4.81 ± 1.98</strong></p>
+        </div>
+        <div class="card" style="border-top: 4px solid var(--red);">
+          <h3 style="color:var(--red);">Attitudes (0–5)</h3>
+          <p>5 Likert items on future financial orientation, satisfaction, goal clarity, worry levels, and sense of financial control.</p>
+          <p style="margin-top:0.5rem;"><strong>Mean: 1.77 ± 1.31</strong></p>
+        </div>
+      </div>
+
+      <h4>Composite Score Summary</h4>
+      <div class="card" style="background:#f9fafb; margin-top:0.3rem;">
+        <div style="display:flex; gap:2rem; flex-wrap:wrap;">
+          <div><span style="font-size:2rem;font-weight:900;color:var(--blue);">11.70</span><br><span style="font-size:0.8rem;color:var(--muted);">Unweighted mean / 21</span></div>
+          <div><span style="font-size:2rem;font-weight:900;color:var(--purple);">11.52</span><br><span style="font-size:0.8rem;color:var(--muted);">Survey-weighted mean</span></div>
+          <div><span style="font-size:2rem;font-weight:900;color:var(--orange);">3.18</span><br><span style="font-size:0.8rem;color:var(--muted);">Standard deviation</span></div>
+          <div><span style="font-size:2rem;font-weight:900;color:var(--green);">0.184</span><br><span style="font-size:0.8rem;color:var(--muted);">Weighted–unweighted gap (small → reliable)</span></div>
+        </div>
+      </div>
+
+      <h4>Validation Checks</h4>
+      <ul class="step-list">
+        <li>Inter-dimension correlations: Knowledge–Behaviour 0.150, Behaviour–Attitudes 0.281, Knowledge–Attitudes −0.015 → dimensions are <strong>related but distinct</strong>, confirming the composite score is theoretically valid.</li>
+        <li>Score ranges are sensible (0–21 observed, median 12.0).</li>
+        <li>Weighted vs unweighted difference is only 0.184 pts → sampling design has minimal impact; unweighted analyses are reliable.</li>
+        <li>Regional breakdown: South (11.38) lowest, North-West (11.91) highest — a narrow range.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ════════ NOTEBOOK 03 ════════ -->
+  <div class="nb-card">
+    <div class="nb-header" style="background: #fff8f0;">
+      <div class="nb-num" style="color: var(--orange);">03</div>
+      <div class="nb-header-text">
+        <h2>Exploratory Data Analysis</h2>
+        <div class="nb-file">notebooks/03_eda.ipynb</div>
+      </div>
+    </div>
+    <div class="nb-body">
+      <p>
+        Systematic gap analysis across every major demographic cut, with <strong>5 publication-ready
+        figures</strong> and statistical significance tests (t-tests, ANOVA) confirming all reported
+        differences are real (p &lt; 0.001).
+      </p>
+
+      <h4>Key Findings by Dimension</h4>
+
+      <div class="stat-diff">
+
+        <div class="stat-diff-card">
+          <div class="label">Work Status — largest raw gap</div>
+          <div class="groups">
+            <div class="grp">Unemployed</div>
+            <div class="grp"></div>
+            <div class="grp">Self-employed</div>
+          </div>
+          <div class="scores">
+            <div class="low">9.04</div>
+            <div>
+              <div class="gap-lbl">gap</div>
+              <div class="gap">3.25 pts</div>
+            </div>
+            <div class="high">12.29</div>
+          </div>
+          <p style="font-size:0.8rem;color:var(--muted);margin-top:0.4rem;">Students also low: 9.59. t-test: p &lt; 0.0001</p>
+        </div>
+
+        <div class="stat-diff-card">
+          <div class="label">Age — Youth Paradox</div>
+          <div class="groups">
+            <div class="grp">18–29</div>
+            <div class="grp"></div>
+            <div class="grp">40–49</div>
+          </div>
+          <div class="scores">
+            <div class="low">10.25</div>
+            <div>
+              <div class="gap-lbl">gap</div>
+              <div class="gap">1.76 pts</div>
+            </div>
+            <div class="high">12.01</div>
+          </div>
+          <p style="font-size:0.8rem;color:var(--muted);margin-top:0.4rem;">18–29 score below even 70–79 (11.66). t = −9.23, p &lt; 0.0001</p>
+        </div>
+
+        <div class="stat-diff-card">
+          <div class="label">Income — steep gradient</div>
+          <div class="groups">
+            <div class="grp">Low (≤€1,750)</div>
+            <div class="grp"></div>
+            <div class="grp">High (&gt;€2,900)</div>
+          </div>
+          <div class="scores">
+            <div class="low">11.39</div>
+            <div>
+              <div class="gap-lbl">gap</div>
+              <div class="gap">1.62 pts</div>
+            </div>
+            <div class="high">13.01</div>
+          </div>
+          <p style="font-size:0.8rem;color:var(--muted);margin-top:0.4rem;">t = −8.51, p &lt; 0.0001</p>
+        </div>
+
+        <div class="stat-diff-card">
+          <div class="label">Education level</div>
+          <div class="groups">
+            <div class="grp">Middle or below</div>
+            <div class="grp"></div>
+            <div class="grp">University+</div>
+          </div>
+          <div class="scores">
+            <div class="low">11.35</div>
+            <div>
+              <div class="gap-lbl">gap</div>
+              <div class="gap">0.91 pts</div>
+            </div>
+            <div class="high">12.26</div>
+          </div>
+          <p style="font-size:0.8rem;color:var(--muted);margin-top:0.4rem;">ANOVA F = 26.4, p &lt; 0.0001</p>
+        </div>
+
+        <div class="stat-diff-card">
+          <div class="label">Internet Access</div>
+          <div class="groups">
+            <div class="grp">No internet</div>
+            <div class="grp"></div>
+            <div class="grp">Has internet</div>
+          </div>
+          <div class="scores">
+            <div class="low">10.99</div>
+            <div>
+              <div class="gap-lbl">gap</div>
+              <div class="gap">0.77 pts</div>
+            </div>
+            <div class="high">11.76</div>
+          </div>
+        </div>
+
+        <div class="stat-diff-card">
+          <div class="label">Double Disadvantage (Edu × Income)</div>
+          <div class="groups">
+            <div class="grp">Low edu + low income</div>
+            <div class="grp"></div>
+            <div class="grp">Uni + high income</div>
+          </div>
+          <div class="scores">
+            <div class="low">11.05</div>
+            <div>
+              <div class="gap-lbl">gap</div>
+              <div class="gap">2.40 pts</div>
+            </div>
+            <div class="high">13.45</div>
+          </div>
+        </div>
+
+      </div>
+
+      <h4>Figures Generated</h4>
+      <div class="grid-2">
+        <div>
+          <ul class="step-list">
+            <li><strong>fig1</strong> — Score distributions (4 histograms: Knowledge, Behaviour, Attitudes, Total)</li>
+            <li><strong>fig2</strong> — Horizontal bar: literacy by work status (red = at-risk groups)</li>
+            <li><strong>fig3</strong> — Bar chart: income band gradient</li>
+          </ul>
+        </div>
+        <div>
+          <ul class="step-list">
+            <li><strong>fig4</strong> — Line chart: age-group paradox (18–29 lowest)</li>
+            <li><strong>fig5</strong> — Heatmap: education × income interaction (double disadvantage)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card" style="background:#fff5f5; border-left:4px solid var(--red); margin-top:1rem;">
+        <h3>Notable: The Youth Paradox</h3>
+        <p>Adults aged 18–29 score <strong>10.25 / 21</strong> — the lowest of any age group, even below the 70–79 cohort (11.66). This contradicts the intuition that younger people are more financially savvy. It reflects lack of real-world financial exposure rather than cognitive decline.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════ NOTEBOOK 04 ════════ -->
+  <div class="nb-card">
+    <div class="nb-header" style="background: #f8f0ff;">
+      <div class="nb-num" style="color: var(--purple);">04</div>
+      <div class="nb-header-text">
+        <h2>Predictive Modelling &amp; Clustering</h2>
+        <div class="nb-file">notebooks/04_model.ipynb</div>
+      </div>
+    </div>
+    <div class="nb-body">
+      <p>
+        Trains baseline supervised models to predict financial vulnerability (binary: below median
+        literacy score) from 8 demographic features, and uses unsupervised K-Means clustering to
+        discover hidden subgroups.
+      </p>
+
+      <h4>Problem Setup</h4>
+      <ul class="step-list">
+        <li>Target: <code>vulnerable = 1</code> if literacy score &lt; 12 (median) — <strong>41.5% of sample</strong></li>
+        <li>Features: Gender, Region, Education, Income, Work status, Internet access, Urban/rural, Age</li>
+        <li>Training set: 3,173 rows (after dropping rows with any missing feature/target)</li>
+        <li>80/20 train-test split, stratified; LR features scaled with StandardScaler</li>
+      </ul>
+
+      <h4>Baseline Model Results</h4>
+      <table class="model-table" style="margin-top:0.4rem;">
+        <thead><tr><th>Model</th><th>Features</th><th>CV Accuracy</th><th>Test Accuracy</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Logistic Regression</td>
+            <td>8 demographic</td>
+            <td>58.2% <span class="acc-bar" style="width:58px;background:var(--blue);"></span></td>
+            <td>57.8%</td>
+          </tr>
+          <tr>
+            <td>Random Forest</td>
+            <td>8 demographic</td>
+            <td>54.9% <span class="acc-bar" style="width:55px;background:var(--purple);"></span></td>
+            <td>~55%</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p style="font-size:0.87rem; color:var(--muted); margin-top:0.6rem;">
+        <em>Modest accuracy is expected: demographics are <strong>distal</strong> predictors of financial literacy — a high-bias signal. The LR model achieves recall of only 5% on the vulnerable class, showing demographics alone cannot reliably flag at-risk individuals.</em>
+      </p>
+
+      <h4>Top Feature Importances (Random Forest)</h4>
+      <p style="font-size:0.87rem; margin-bottom:0.6rem;">Income and Age are the most informative demographic features.</p>
+      <div class="feat-row"><span class="feat-name">Income</span><div class="feat-bar-wrap"><div class="feat-bar" style="width:90%;background:var(--red);"></div></div><span class="feat-val">highest</span></div>
+      <div class="feat-row"><span class="feat-name">Age</span><div class="feat-bar-wrap"><div class="feat-bar" style="width:78%;background:var(--red);"></div></div><span class="feat-val">high</span></div>
+      <div class="feat-row"><span class="feat-name">Education</span><div class="feat-bar-wrap"><div class="feat-bar" style="width:65%;background:var(--blue);"></div></div><span class="feat-val">mid</span></div>
+      <div class="feat-row"><span class="feat-name">Work status</span><div class="feat-bar-wrap"><div class="feat-bar" style="width:55%;background:var(--blue);"></div></div><span class="feat-val">mid</span></div>
+      <div class="feat-row"><span class="feat-name">Region / Internet</span><div class="feat-bar-wrap"><div class="feat-bar" style="width:35%;background:#b0b8cc;"></div></div><span class="feat-val">low</span></div>
+
+      <h4>K-Means Clustering (k = 4)</h4>
+      <p style="font-size:0.87rem; margin-bottom:0.8rem;">
+        Used the elbow method to confirm k = 4. Clusters are sorted by ascending mean literacy score.
+      </p>
+      <div class="cluster-grid">
+        <div class="cluster-card a">
+          <div class="c-title">Cluster A — Hidden Vulnerable</div>
+          <div class="c-score" style="color:var(--red);">11.02</div>
+          <p>Elderly (avg age ~69), very low internet access, low income. <strong>261 individuals.</strong> Most at-risk subgroup. Offline, isolated, limited financial engagement.</p>
+        </div>
+        <div class="cluster-card b">
+          <div class="c-title">Cluster B — Older, Low Income, Online</div>
+          <div class="c-score" style="color:var(--orange);">~11.5</div>
+          <p>Older adults who have internet access but remain financially constrained. Retirement-age or homemakers. Moderate vulnerability.</p>
+        </div>
+        <div class="cluster-card c">
+          <div class="c-title">Cluster C — Middle-Aged, Mid Income</div>
+          <div class="c-score" style="color:#9a8a00;">~12.0</div>
+          <p>Core working-age population. Near-average literacy. No particular advantage or disadvantage.</p>
+        </div>
+        <div class="cluster-card d">
+          <div class="c-title">Cluster D — Younger, Higher Income</div>
+          <div class="c-score" style="color:var(--green);">~13.0</div>
+          <p>Younger respondents, higher income, better internet penetration. Best literacy outcomes. Still show signs of the youth paradox at the margins.</p>
+        </div>
+      </div>
+
+      <h4>Additional Analysis</h4>
+      <ul class="step-list" style="margin-top:0.6rem;">
+        <li>Digital financial skills score (QS4 battery): surprisingly flat across age groups (13.37–14.21), suggesting digital confidence ≠ financial literacy</li>
+        <li>All reported group differences confirmed statistically significant at p &lt; 0.001 via t-test / ANOVA</li>
+        <li>Weighted mean (11.52) vs unweighted mean (11.70): difference = 0.18 pts → sampling design has negligible effect</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ════════ NOTEBOOK 05 ════════ -->
+  <div class="nb-card">
+    <div class="nb-header" style="background: #f0fff4;">
+      <div class="nb-num" style="color: var(--green);">05</div>
+      <div class="nb-header-text">
+        <h2>Feature Engineering &amp; Gradient Boosting</h2>
+        <div class="nb-file">notebooks/05_feature_engineering..ipynb</div>
+      </div>
+    </div>
+    <div class="nb-body">
+      <p>
+        The central insight notebook. Constructs <strong>7 behavioural composite features</strong>
+        from raw survey items and shows they dramatically outperform demographics alone.
+        Final model: Gradient Boosting at <strong>70.1% CV accuracy</strong>.
+      </p>
+
+      <h4>Engineered Features</h4>
+      <div class="grid-2">
+        <div>
+          <ul class="step-list">
+            <li>
+              <strong>Financial Resilience Index (0–3)</strong> <span class="tag eng">r = 0.44</span><br>
+              <span style="font-size:0.82rem;color:var(--muted);">Can cover financial shock (qf4) + money left over (qs2_4) + has savings goal (qf13)</span>
+            </li>
+            <li>
+              <strong>Product Breadth</strong> <span class="tag eng">r = 0.37</span><br>
+              <span style="font-size:0.82rem;color:var(--muted);">Count of financial products currently held (savings, insurance, investments, etc.)</span>
+            </li>
+            <li>
+              <strong>Budget Behaviour Score (0–6)</strong> <span class="tag eng">r = 0.32</span><br>
+              <span style="font-size:0.82rem;color:var(--muted);">Count of active budgeting methods used (qf2_1–qf2_6)</span>
+            </li>
+            <li>
+              <strong>Active Saver Flag</strong> <span class="tag eng">r = 0.27</span><br>
+              <span style="font-size:0.82rem;color:var(--muted);">Whether respondent has any active saving vehicle (binary)</span>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <ul class="step-list">
+            <li>
+              <strong>Self-rated Knowledge</strong> <span class="tag">r = 0.20</span><br>
+              <span style="font-size:0.82rem;color:var(--muted);">Reversed scale: 5 = very high knowledge, 1 = very low</span>
+            </li>
+            <li>
+              <strong>Digital Engagement Score</strong> <span class="tag">r = 0.03</span><br>
+              <span style="font-size:0.82rem;color:var(--muted);">Mean usage frequency of digital financial services (weak predictor)</span>
+            </li>
+            <li>
+              <strong>Age Squared</strong> <span class="tag">r = 0.05</span><br>
+              <span style="font-size:0.82rem;color:var(--muted);">Captures potential non-linear age effect (weak — dropped from final model)</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <h4>Final Feature Set</h4>
+      <p style="font-size:0.87rem; margin-bottom:0.5rem;">
+        13 features: 8 demographic + 5 behavioural (resilience_index, product_breadth, budget_score, active_saver, self_knowledge). Training set: 3,026 rows.
+      </p>
+
+      <h4>Model Comparison</h4>
+      <table class="model-table">
+        <thead><tr><th>Model</th><th>Features</th><th>CV Accuracy</th><th>Δ vs Baseline</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Logistic Regression</td>
+            <td>8 demographic</td>
+            <td>58.2%</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>Random Forest (baseline)</td>
+            <td>8 demographic</td>
+            <td>54.9%</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>Random Forest (enhanced)</td>
+            <td>13 (+ behavioural)</td>
+            <td>69.6% ± 0.8%</td>
+            <td><span class="pill green">+14.7pp</span></td>
+          </tr>
+          <tr>
+            <td><strong>Gradient Boosting</strong></td>
+            <td><strong>13 (+ behavioural)</strong></td>
+            <td><strong>70.1% ± 1.3%</strong></td>
+            <td><span class="pill green">+15.2pp</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h4>Gradient Boosting — Top Feature Importances</h4>
+      <div class="feat-row"><span class="feat-name" style="color:var(--green);font-weight:700;">Resilience Index</span><div class="feat-bar-wrap"><div class="feat-bar" style="width:95%;background:var(--green);"></div></div><span class="feat-val">0.443</span></div>
+      <div class="feat-row"><span class="feat-name" style="color:var(--green);font-weight:700;">Product Breadth</span><div class="feat-bar-wrap"><div class="feat-bar" style="width:80%;background:var(--green);"></div></div><span class="feat-val">0.367</span></div>
+      <div class="feat-row"><span class="feat-name" style="color:var(--green);font-weight:700;">Budget Score</span><div class="feat-bar-wrap"><div class="feat-bar" style="width:70%;background:var(--green);"></div></div><span class="feat-val">0.319</span></div>
+      <div class="feat-row"><span class="feat-name">Income</span><div class="feat-bar-wrap"><div class="feat-bar" style="width:60%;background:var(--blue);"></div></div><span class="feat-val">~0.25</span></div>
+      <div class="feat-row"><span class="feat-name">Age</span><div class="feat-bar-wrap"><div class="feat-bar" style="width:50%;background:var(--blue);"></div></div><span class="feat-val">~0.20</span></div>
+      <p style="font-size:0.75rem;color:var(--muted);margin-top:0.3rem;">Green bars = engineered behavioural features · Blue = demographics</p>
+
+      <div class="card" style="background:#e4f4e9; border-left:4px solid var(--green); margin-top:1rem;">
+        <h3>Central Finding</h3>
+        <p>
+          Adding behavioural features lifts accuracy from <strong>~55% → 70%</strong> (+15 percentage points).
+          The top 3 predictors are all behavioural, not demographic. <strong>What people do
+          financially matters more than who they are.</strong> A single feature — the financial-resilience
+          index — explains more variance than every demographic variable combined (r = 0.44).
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── KEY FINDINGS SUMMARY ── -->
+  <hr class="sec" />
+  <div class="section-title">Key Findings Summary</div>
+
+  <table class="findings-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Finding</th>
+        <th>Evidence</th>
+        <th>Notebook</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>1</strong></td>
+        <td>Work status drives the largest single gap</td>
+        <td>Unemployed 9.04 vs self-employed 12.29 (gap: 3.25 pts)</td>
+        <td><span class="pill blue">NB 03</span></td>
+      </tr>
+      <tr>
+        <td><strong>2</strong></td>
+        <td>Youth paradox — 18–29 score lowest of all ages</td>
+        <td>10.25, below even the 70–79 group (11.66)</td>
+        <td><span class="pill blue">NB 03</span></td>
+      </tr>
+      <tr>
+        <td><strong>3</strong></td>
+        <td>Steep income gradient throughout</td>
+        <td>Low income 11.39 → high income 13.01 (gap: 1.62 pts)</td>
+        <td><span class="pill blue">NB 03</span></td>
+      </tr>
+      <tr>
+        <td><strong>4</strong></td>
+        <td>Double disadvantage: low education × low income</td>
+        <td>Lowest cell 11.05 vs highest 13.45 (gap: 2.40 pts)</td>
+        <td><span class="pill blue">NB 03</span></td>
+      </tr>
+      <tr>
+        <td><strong>5</strong></td>
+        <td>Behaviour beats demographics in prediction</td>
+        <td>Accuracy rises from 55% → 70% after adding 5 behavioural features</td>
+        <td><span class="pill green">NB 05</span></td>
+      </tr>
+      <tr>
+        <td><strong>6</strong></td>
+        <td>Hidden vulnerable cluster identified</td>
+        <td>261 elderly, low-income, offline individuals — lowest literacy (11.02)</td>
+        <td><span class="pill orange">NB 04</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ── TOOLS + LIMITATIONS ── -->
+  <hr class="sec" />
+  <div class="grid-2">
+    <div>
+      <div class="section-title">Tools &amp; Stack</div>
+      <div class="card">
+        <div style="display:flex;flex-wrap:wrap;gap:0.4rem;">
+          <span class="tag">Python</span>
+          <span class="tag">pandas</span>
+          <span class="tag">numpy</span>
+          <span class="tag">scikit-learn</span>
+          <span class="tag">scipy</span>
+          <span class="tag">matplotlib</span>
+          <span class="tag">seaborn</span>
+          <span class="tag">statsmodels</span>
+          <span class="tag">Docker</span>
+          <span class="tag">JupyterLab</span>
+        </div>
+        <p style="margin-top:0.8rem;">
+          <strong>Algorithms used:</strong> Logistic Regression, Random Forest (n=200–300, depth 6–8),
+          K-Means (k=4, n_init=10), Gradient Boosting (n=200, lr=0.05, depth=4).
+        </p>
+      </div>
+    </div>
+    <div>
+      <div class="section-title">Limitations</div>
+      <div class="card">
+        <ul class="step-list">
+          <li><strong>Cross-sectional data</strong> — associations only, no causal inference</li>
+          <li><strong>Income non-response 31%</strong> — likely non-random, may bias income analyses</li>
+          <li><strong>Self-reported behaviour</strong> — possible social-desirability bias</li>
+          <li><strong>Coarse geography</strong> — only 5 macro-regions for ISTAT enrichment</li>
+          <li><strong>Attitudes sub-score</strong> — mean 1.77/5, very low and with unusual K–A correlation (−0.015)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── DATA FLOW ── -->
+  <hr class="sec" />
+  <div class="section-title">Data Flow</div>
+  <div class="card" style="background:#f9fafb;">
+    <div style="font-family:'SFMono-Regular',Consolas,monospace; font-size:0.85rem; line-height:2;">
+      <span style="color:#888;">data/raw/</span>Database_ENG.csv (4,862 × 219)<br>
+      &nbsp;&nbsp;→ <strong>NB 01</strong>: recode sentinels, merge ISTAT&nbsp;&nbsp;
+        <span style="color:var(--muted);">→ </span><span style="color:var(--blue);">iacofi_clean.csv</span> (4,862 × 222)<br>
+      &nbsp;&nbsp;→ <strong>NB 02</strong>: OECD score construction&nbsp;&nbsp;
+        <span style="color:var(--muted);">→ </span><span style="color:var(--blue);">iacofi_scored.csv</span> (4,862 × 269)<br>
+      &nbsp;&nbsp;→ <strong>NB 03</strong>: EDA plots (fig1–fig5)&nbsp;&nbsp;
+        <span style="color:var(--muted);">→ figures saved to data/processed/</span><br>
+      &nbsp;&nbsp;→ <strong>NB 04</strong>: LR + RF + KMeans (fig6–fig9)&nbsp;&nbsp;
+        <span style="color:var(--muted);">→ </span><span style="color:var(--blue);">iacofi_final.csv</span> (4,862 × 270)<br>
+      &nbsp;&nbsp;→ <strong>NB 05</strong>: Feature engineering + GB (fig10–fig12)
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<footer>
+  <p>
+    <strong>Financial Vulnerability in Italy — IACOFI 2023 Analysis</strong><br>
+    Data Science Lab · University of Milano-Bicocca · A.Y. 2025/26<br>
+    Authors: Amin Entezari &amp; Ali Sedghiye · Supervisor: Prof. Silvio Gerli
+  </p>
+  <p style="margin-top:0.6rem; font-size:0.75rem;">
+    Source data: Bank of Italy IACOFI 2023 · OECD/INFE methodology · ISTAT 2023 regional statistics
+  </p>
+</footer>
+
+</body>
+</html>
