@@ -1,0 +1,7 @@
+services:
+  ds_lab:
+    build: .
+    ports:
+      - "8890:8888"
+    volumes:
+      - .:/app
