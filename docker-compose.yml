@@ -1,7 +1,11 @@
 services:
   ds_lab:
     build: .
+    container_name: dsl_project
     ports:
       - "8890:8888"
     volumes:
+      # Mount the full project so edits on the host appear instantly in the container.
+      # Place Database_ENG.csv in data/raw/ on the host before running notebooks.
       - .:/app
+    restart: unless-stopped

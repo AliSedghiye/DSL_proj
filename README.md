@@ -68,12 +68,14 @@ The analysis follows a five-stage, problem-first logic:
 │   ├── 02_score_construction.ipynb   # OECD score, validity, weights check
 │   ├── 03_eda.ipynb                  # exploratory analysis + significance tests
 │   ├── 04_model.ipynb                # Logistic Reg, Random Forest, K-Means
-│   └── 05_feature_engineering.ipynb  # behavioural features, Gradient Boosting
+│   ├── 05_feature_engineering.ipynb  # behavioural features, Gradient Boosting
+│   └── better_model.ipynb            # improved model: 19 features, tuned GB, ensembles
 ├── report/
 │   └── dslab_report.pdf      # final report
 ├── requirements.txt
 ├── docker-compose.yml
 ├── Dockerfile
+├── .dockerignore
 └── README.md
 ```
 
@@ -83,14 +85,46 @@ The analysis follows a five-stage, problem-first logic:
 
 ### Option A — Docker (recommended)
 
+**Prerequisites:** Docker and Docker Compose installed.
+
 ```bash
 git clone https://github.com/AliSedghiye/DSL_proj.git
 cd DSL_proj
-# place Database_ENG.csv in data/raw/
-docker-compose up
+
+# 1. Place the raw survey file in data/raw/ before starting
+#    Download Database_ENG.csv from the Bank of Italy (see Dataset section)
+cp /path/to/Database_ENG.csv data/raw/
+
+# 2. Build the image and start the container
+docker-compose up --build
 ```
 
-Then open the Jupyter URL shown in the terminal and run the notebooks in order (01 → 05).
+Once running, open **http://localhost:8890** in your browser — no token or password is required.
+
+Run the notebooks in order: `01 → 02 → 03 → 04 → 05 → better_model`
+
+Each notebook writes its outputs to `data/processed/`. Any edits you make on the host are reflected instantly inside the container (live volume mount).
+
+To stop the container:
+
+```bash
+docker-compose down
+```
+
+To run in the background (detached mode):
+
+```bash
+docker-compose up --build -d
+# then stop with:
+docker-compose down
+```
+
+> **Security note:** token authentication is disabled by default for local development.
+> To protect a remote deployment set `JUPYTER_TOKEN` in `docker-compose.yml`:
+> ```yaml
+> environment:
+>   - JUPYTER_TOKEN=your_secret_token
+> ```
 
 ### Option B — Local Python
 
@@ -110,12 +144,14 @@ Run the notebooks sequentially; each stage writes its outputs to `data/processed
 
 **Composite score (national):** mean 11.70 / 21 (weighted 11.52)
 
-| Model | Features | CV accuracy |
-|-------|----------|-------------|
-| Logistic Regression | 8 demographic | 58.2% |
-| Random Forest | 8 demographic | 54.9% |
-| Random Forest | 13 (+ behavioural) | 69.6% |
-| **Gradient Boosting** | **13 (+ behavioural)** | **70.1%** |
+| Model | Notebook | Features | CV accuracy |
+|-------|----------|----------|-------------|
+| Logistic Regression | `04_model` | 8 demographic | 58.2% |
+| Random Forest | `04_model` | 8 demographic | 54.9% |
+| Random Forest | `05_feature_engineering` | 13 (+ behavioural) | 69.6% |
+| Gradient Boosting | `05_feature_engineering` | 13 (+ behavioural) | 70.1% |
+| Tuned Gradient Boosting | `better_model` | 19 (+ digital skills, worry, products, regional) | see notebook |
+| Voting / Stacking Ensemble | `better_model` | 19 | see notebook |
 
 **Top engineered feature correlations with literacy:** resilience index 0.44 · product breadth 0.37 · budgeting 0.32
 
