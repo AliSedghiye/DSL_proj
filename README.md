@@ -71,7 +71,6 @@ The analysis follows a five-stage, problem-first logic:
 │   └── 05_feature_engineering.ipynb  # behavioural features, Gradient Boosting
 ├── report/
 │   └── dslab_report.pdf      # final report
-├── src/                      # helper scripts (if any)
 ├── requirements.txt
 ├── docker-compose.yml
 ├── Dockerfile
